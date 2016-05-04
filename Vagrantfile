@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :shell, path: 'provision.sh'
+  config.vm.provision :shell, path: 'provision-timesyncd.sh'
   config.vm.provision :shell, path: 'provision-anyenv.sh', privileged: false
   config.vm.provision :shell, path: 'provision-libressl.sh', privileged: false
   config.vm.provision :shell, path: 'provision-ruby.sh', privileged: false
