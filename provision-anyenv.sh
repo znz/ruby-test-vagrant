@@ -4,7 +4,9 @@ if [ ! -d "$HOME/.anyenv" ]; then
   git clone https://github.com/riywo/anyenv "$HOME/.anyenv"
 fi
 if ! grep -q anyenv "$HOME/.bashrc"; then
+  # shellcheck disable=SC2016
   echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.bashrc
+  # shellcheck disable=SC2016
   echo 'eval "$(anyenv init - --no-rehash)"' >> ~/.bashrc
 fi
 export PATH="$HOME/.anyenv/bin:$PATH"
