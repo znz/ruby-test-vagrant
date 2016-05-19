@@ -12,9 +12,17 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init - --no-rehash)"
   set -x
 fi
+RUBY_CACHE_SRCDIR="/vagrant/ruby"
 RUBY_SRCDIR="$HOME/ruby"
+if [ ! -d "$RUBY_CACHE_SRCDIR" ]; then
+  git clone https://github.com/ruby/ruby "$RUBY_CACHE_SRCDIR"
+else
+  pushd "$RUBY_CACHE_SRCDIR"
+  git pull
+  popd
+fi
 if [ ! -d "$RUBY_SRCDIR" ]; then
-  git clone https://github.com/ruby/ruby "$RUBY_SRCDIR"
+  rsync -a "$RUBY_CACHE_SRCDIR/" "$RUBY_SRCDIR/"
 fi
 if [ ! -f "$RUBY_SRCDIR/configure" ]; then
   pushd "$RUBY_SRCDIR"
