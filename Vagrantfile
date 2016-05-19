@@ -20,12 +20,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vm.vm.box = 'ubuntu/wily64'
   end
 
-  config.vm.define 'xenial64', primary: true do |vm|
+  config.vm.define 'xenial64', autostart: false do |vm|
     vm.vm.box = 'ubuntu/xenial64'
   end
 
-  config.vm.define 'jessie64', autostart: false do |vm|
-    vm.vm.box = 'debian/jessie64'
+  config.vm.define 'jessie64', primary: true do |vm|
+    vm.vm.box = 'debian/contrib-jessie64'
   end
 
   config.vm.provider 'virtualbox' do |vb|
