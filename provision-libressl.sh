@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euxo pipefail
-VERSION=2.3.4
+VERSION=2.4.0
 CACHE_DIR="/vagrant/libressl"
 mkdir -p "$CACHE_DIR"
 cd "$CACHE_DIR"
