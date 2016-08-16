@@ -17,7 +17,9 @@ cd "$HOME/build"
 if [[ ! -d "openssl-${VERSION}" ]]; then
   tar zxf "$CACHE_DIR/openssl-${VERSION}.tar.gz"
 fi
-cd "openssl-${VERSION}"
-./config shared --prefix="$HOME/opt/openssl-${VERSION}"
-make
-make install
+if [[ ! -f "$HOME/opt/openssl-${VERSION}/bin/openssl" ]]; then
+  cd "openssl-${VERSION}"
+  ./config shared --prefix="$HOME/opt/openssl-${VERSION}"
+  make
+  make install
+fi

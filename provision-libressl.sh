@@ -20,8 +20,10 @@ cd "$BUILD_DIR"
 if [ ! -d "libressl-${VERSION}" ]; then
   tar zxf "$CACHE_DIR/libressl-${VERSION}.tar.gz"
 fi
-cd "libressl-${VERSION}"
-./configure --prefix="$HOME/opt/libressl-${VERSION}"
-make
-make check
-make install
+if [ ! -f "$HOME/opt/libressl-${VERSION}/bin/openssl" ]; then
+  cd "libressl-${VERSION}"
+  ./configure --prefix="$HOME/opt/libressl-${VERSION}"
+  make
+  make check
+  make install
+fi
