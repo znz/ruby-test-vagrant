@@ -13,7 +13,7 @@ if [ -d "$HOME/.rbenv" ]; then
   set -x
 fi
 RUBY_CACHE_SRCDIR="/vagrant/ruby"
-RUBY_SRCDIR="$HOME/ruby"
+RUBY_SRCDIR="$HOME/s/github.com/ruby/ruby"
 if [ ! -d "$RUBY_CACHE_SRCDIR" ]; then
   git clone https://github.com/ruby/ruby "$RUBY_CACHE_SRCDIR"
 else
@@ -22,7 +22,11 @@ else
   popd
 fi
 if [ ! -d "$RUBY_SRCDIR" ]; then
+  mkdir -p "$RUBY_SRCDIR"
   rsync -a "$RUBY_CACHE_SRCDIR/" "$RUBY_SRCDIR/"
+fi
+if [ ! -L "$HOME/ruby" ]; then
+  ln -s "$RUBY_SRCDIR" "$HOME/ruby"
 fi
 if [ ! -f "$RUBY_SRCDIR/configure" ]; then
   pushd "$RUBY_SRCDIR"
@@ -42,7 +46,11 @@ if [ ! -f "$(rbenv root)/versions/git/bin/ruby" ]; then
     BASERUBY=--with-baseruby=/usr/bin/ruby
     CC="ccache clang"
   fi
-  ../configure --prefix="$(rbenv root)/versions/git" --with-openssl-dir="$HOME/local" --enable-shared --enable-debug-env CPPFLAGS='-DRUBY_DEBUG_ENV -DARRAY_DEBUG' --with-valgrind "$BASERUBY" --disable-install-doc CC="$CC"
+  LIBRESSL_DIR=$(ls -d ~/opt/libressl-* | tail -n1)
+  CPPFLAGS="-DRUBY_DEBUG_ENV"
+  CPPFLAGS="$CPPFLAGS -DARRAY_DEBUG"
+  #CPPFLAGS="$CPPFLAGS -DSHARABLE_MIDDLE_SUBSTRING=1"
+  ../configure --prefix="$(rbenv root)/versions/git" --with-openssl-dir="$LIBRESSL_DIR" --enable-shared --enable-debug-env CPPFLAGS="$CPPFLAGS" --with-valgrind "$BASERUBY" --disable-install-doc CC="$CC"
   make
   make install
   rbenv rehash
