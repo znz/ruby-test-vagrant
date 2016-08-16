@@ -33,8 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'provision-timesyncd.sh'
   config.vm.provision :shell, path: 'provision-packages.sh'
   config.vm.provision :shell, path: 'provision-packages-misc.sh'
+  config.vm.provision :shell, path: 'provision-nadoka.sh'
   config.vm.provision :shell, path: 'provision-anyenv.sh', privileged: false
   config.vm.provision :shell, path: 'provision-libressl.sh', privileged: false
   config.vm.provision :shell, path: 'provision-ruby-git.sh', privileged: false
-  config.vm.provision :shell, path: 'provision-nadoka.sh'
+  config.vm.provision :shell, path: 'provision-old-openssl.sh', privileged: false
 end
