@@ -14,3 +14,5 @@ apt-get install -y ruby
 if [ "$(lsb_release -cs)" = "precise" ]; then
   apt-get install -y ruby1.9.1
 fi
+echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
+apt-get install -y unattended-upgrades
