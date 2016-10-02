@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euxo pipefail
-VERSION=2.4.2
+VERSION=2.5.0
 CACHE_DIR="/vagrant/libressl"
 BUILD_DIR="$HOME/build"
 mkdir -p "$CACHE_DIR"
