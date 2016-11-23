@@ -40,6 +40,14 @@ versions=(
 export RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$HOME/opt/openssl-$OLD_OPENSSL_VERSION"
 for ver in "${versions[@]}"; do
   if ! RBENV_VERSION=$ver ruby -v 2>/dev/null; then
+    case "$ver" in
+      1.8.6*|1.9.0-0)
+        export MAKEOPTS=-j1
+        ;;
+      *)
+        unset MAKEOPTS
+        ;;
+    esac
     set -x
     if [ -f "/vagrant/ruby-${ver}.patch" ]; then
       rbenv install --patch "$ver" < "/vagrant/ruby-${ver}.patch"
@@ -49,6 +57,7 @@ for ver in "${versions[@]}"; do
     set +x
   fi
 done
+unset MAKEOPTS
 versions=(
   2.1.0
   2.1.10
