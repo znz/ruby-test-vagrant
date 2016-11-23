@@ -15,7 +15,7 @@ if [ -d "$HOME/.rbenv" ]; then
   set -x
 fi
 if [ ! -d "$(rbenv root)/plugins/rbenv-each" ]; then
-  git clone https://github.com/chriseppstein/rbenv-each.git "$(rbenv root)/plugins/rbenv-each"
+  git clone https://github.com/rbenv/rbenv-each "$(rbenv root)/plugins/rbenv-each"
 fi
 sed -i -e 's,^[^/].*BN_rand_range.*,/* \0 */,' \
        -e 's,^[^/].*BN_pseudo_rand_range.*,/* \0 */,' \
