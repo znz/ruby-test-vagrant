@@ -18,7 +18,8 @@ if [ ! -d "$RUBY_CACHE_SRCDIR" ]; then
   git clone https://github.com/ruby/ruby "$RUBY_CACHE_SRCDIR"
 else
   pushd "$RUBY_CACHE_SRCDIR"
-  git pull
+  git pull --prune --tags
+  git gc
   popd
 fi
 if [ ! -d "$RUBY_SRCDIR" ]; then
