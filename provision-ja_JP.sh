@@ -1,13 +1,10 @@
 #!/bin/bash
 set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
-apt-get update || :
-apt-get install -y etckeeper git
-sed -i -e 's/^#VCS="git"/VCS="git"/' -e 's/^VCS="bzr"/#VCS="bzr"/' -e 's/^GIT_COMMIT_OPTIONS=""/GIT_COMMIT_OPTIONS="-v"/' /etc/etckeeper/etckeeper.conf
-etckeeper init 'Initial commit'
-etckeeper commit 'Setup etckeeper' || :
-sed -i -e 's,//\(us\.\)\?archive\.ubuntu\.com,//jp.archive.ubuntu.com,' /etc/apt/sources.list
-sed -i -e 's,//httpredir\.debian\.org,//ftp.jp.debian.org,' /etc/apt/sources.list
+sed -i \
+    -e 's,//\(us\.\)\?archive\.ubuntu\.com,//jp.archive.ubuntu.com,' \
+    -e 's,//httpredir\.debian\.org,//ftp.jp.debian.org,' \
+    /etc/apt/sources.list
 etckeeper commit 'Use JP mirror' || :
 apt-get update || :
 apt-get install -y language-pack-ja || {

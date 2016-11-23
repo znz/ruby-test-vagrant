@@ -54,7 +54,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ['modifyvm', :id, '--nictype1', 'virtio']
   end
 
-  config.vm.provision :shell, path: 'provision.sh'
+  config.vm.provision :shell, path: 'provision-etckeeper.sh'
+  config.vm.provision :shell, path: 'provision-ja_JP.sh'
   config.vm.provision :shell, path: 'provision-journald.sh'
   config.vm.provision :shell, path: 'provision-timesyncd.sh'
   config.vm.provision :shell, path: 'provision-packages.sh'
