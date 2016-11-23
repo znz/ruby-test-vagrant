@@ -2,7 +2,7 @@
 set -euxo pipefail
 VERSION=2.5.0
 CACHE_DIR="/vagrant/libressl"
-BUILD_DIR="$HOME/build"
+BUILD_DIR="/tmp/build"
 mkdir -p "$CACHE_DIR"
 cd "$CACHE_DIR"
 if ! gpg --list-keys | grep -q D5E4D8D5; then
