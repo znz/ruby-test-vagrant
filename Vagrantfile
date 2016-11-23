@@ -4,24 +4,49 @@
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  if Vagrant.has_plugin?("vagrant-cachier")
-    config.cache.scope = :box
+  config.vm.define 'jessie64', primary: true do |vm|
+    vm.vm.box = 'debian/contrib-jessie64'
+    if Vagrant.has_plugin?("vagrant-cachier")
+      vm.cache.scope = :box
+    end
   end
 
   config.vm.define 'precise64', autostart: false do |vm|
     vm.vm.box = 'ubuntu/precise64'
+    if Vagrant.has_plugin?("vagrant-cachier")
+      vm.cache.scope = :box
+    end
   end
 
   config.vm.define 'trusty64', autostart: false do |vm|
     vm.vm.box = 'ubuntu/trusty64'
+    if Vagrant.has_plugin?("vagrant-cachier")
+      vm.cache.scope = :box
+    end
   end
 
   config.vm.define 'xenial64', autostart: false do |vm|
-    vm.vm.box = 'ubuntu/xenial64'
+    vm.vm.box = 'bento/ubuntu-16.04'
+    vm.vm.hostname = 'xenial64'
+    if Vagrant.has_plugin?("vagrant-cachier")
+      vm.cache.scope = :box
+      vm.cache.synced_folder_opts = {
+        owner: "_apt",
+        group: "_apt",
+        mount_options: ["dmode=777", "fmode=666"]
+      }
+    end
   end
 
-  config.vm.define 'jessie64', primary: true do |vm|
-    vm.vm.box = 'debian/contrib-jessie64'
+  config.vm.define 'yakkety64', autostart: false do |vm|
+    vm.vm.box = 'boxcutter/ubuntu1610'
+    vm.vm.hostname = 'yakkety64'
+    if Vagrant.has_plugin?("vagrant-cachier")
+      vm.cache.scope = :box
+      vm.cache.synced_folder_opts = {
+        owner: "_apt",
+      }
+    end
   end
 
   config.vm.provider 'virtualbox' do |vb|
