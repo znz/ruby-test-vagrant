@@ -70,6 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'provision-timesyncd.sh'
   config.vm.provision :shell, path: 'provision-packages.sh'
   config.vm.provision :shell, path: 'provision-packages-misc.sh'
+  config.vm.provision :shell, path: 'provision-packages-go.sh'
   config.vm.provision :shell, path: 'provision-nadoka.sh'
   config.vm.provision :shell, path: 'provision-dot-shell.sh', privileged: false
   config.vm.provision :shell, path: 'provision-anyenv.sh', privileged: false
@@ -79,4 +80,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'provision-old-openssl.sh', privileged: false
   config.vm.provision :shell, path: 'provision-ruby-released.sh', privileged: false
   config.vm.provision :shell, path: 'provision-ruby-latest.sh', privileged: false
+  config.vm.provision :shell, path: 'provision-vim.sh', privileged: false
 end
