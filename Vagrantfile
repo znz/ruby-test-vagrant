@@ -50,8 +50,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider 'virtualbox' do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '1024']
+    vb.memory = 1024
+    vb.cpus = 2
     vb.customize ['modifyvm', :id, '--nictype1', 'virtio']
+    vb.customize [
+      "modifyvm", :id,
+      "--hwvirtex", "on",
+      "--nestedpaging", "on",
+      "--largepages", "on",
+      "--ioapic", "on",
+      "--pae", "on",
+      "--paravirtprovider", "kvm",
+    ]
   end
 
   config.vm.provision :shell, path: 'provision-etckeeper.sh'
