@@ -13,6 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define 'precise64', autostart: false do |vm|
     vm.vm.box = 'ubuntu/precise64'
+    vm.vm.hostname = 'precise64'
     if Vagrant.has_plugin?("vagrant-cachier")
       vm.cache.scope = :box
     end
