@@ -18,7 +18,7 @@ if [ ! -d "$RUBY_CACHE_SRCDIR" ]; then
   git clone https://github.com/ruby/ruby "$RUBY_CACHE_SRCDIR"
 else
   pushd "$RUBY_CACHE_SRCDIR"
-  git pull --prune --tags
+  git pull --prune --tags || { git pull --prune && git fetch --tags; }
   git gc
   popd
 fi
