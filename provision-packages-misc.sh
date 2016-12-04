@@ -3,6 +3,7 @@ set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
 apt-get install -y aptitude
 apt-get install -y clang
+apt-get install -y haveged
 apt-get install -y lv
 apt-get install -y source-highlight
 apt-get install -y subversion
